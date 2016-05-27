@@ -79,14 +79,16 @@ endif
     syn keyword pythonLambdaExpr lambda
     syn keyword pythonStatement with as
 
-    syn keyword pythonStatement def nextgroup=pythonFunction skipwhite
+    " def
+    syn keyword pythonDeclaration def nextgroup=pythonFunction skipwhite
     syn match pythonFunction "\%(\%(def\s\|@\)\s*\)\@<=\h\%(\w\|\.\)*" contained nextgroup=pythonVars
     syn region pythonVars start="(" skip=+\(".*"\|'.*'\)+ end=")" contained contains=pythonParameters transparent keepend
     syn match pythonParameters "[^,]*" contained contains=pythonParam skipwhite
     syn match pythonParam "[^,]*" contained contains=pythonExtraOperator,pythonLambdaExpr,pythonBuiltinObj,pythonBuiltinType,pythonConstant,pythonString,pythonNumber,pythonBrackets,pythonSelf,pythonComment skipwhite
     syn match pythonBrackets "{[(|)]}" contained skipwhite
 
-    syn keyword pythonStatement class nextgroup=pythonClass skipwhite
+    " class
+    syn keyword pythonDeclaration class nextgroup=pythonClass skipwhite
     syn match pythonClass "\%(\%(class\s\)\s*\)\@<=\h\%(\w\|\.\)*" contained nextgroup=pythonClassVars
     syn region pythonClassVars start="(" end=")" contained contains=pythonClassParameters transparent keepend
     syn match pythonClassParameters "[^,\*]*" contained contains=pythonBuiltin,pythonBuiltinObj,pythonBuiltinType,pythonExtraOperatorpythonStatement,pythonBrackets,pythonString,pythonComment skipwhite
@@ -335,11 +337,12 @@ endif
 " Highlight {{{
 " =============
 
+    hi def link  pythonDeclaration  Keyword
     hi def link  pythonStatement    Statement
     hi def link  pythonLambdaExpr   Statement
     hi def link  pythonInclude      Include
     hi def link  pythonFunction     Function
-    hi def link  pythonClass        Type
+    hi def link  pythonClass        Function
     hi def link  pythonParameters   Normal
     hi def link  pythonParam        Normal
     hi def link  pythonBrackets     Normal
